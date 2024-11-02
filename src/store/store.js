@@ -8,3 +8,5 @@ const store = configureStore({
         posts: postSlice
     }
 })
+
+export default store
