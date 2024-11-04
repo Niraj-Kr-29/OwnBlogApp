@@ -77,15 +77,31 @@ export class Service{
         }
     }
 
-    async getPosts(queries = [Query.equal("status","active")]){
+    async getAllPosts(queries = [Query.equal("status","active")]){
         try {
-            return await this.databases.listDocuments(
+            const response = await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 queries
             )
+            return response.documents
         } catch (error) {
             console.log("Appwrite Service::getPosts::error ", error);
+            return false
+        }
+    }
+
+    async getPostsWithCategory(category){
+        try {
+           const response = await this.databases.listDocuments(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId,
+            [Query.equal("status","active"),
+                Query.equal("category",{category})
+            ]
+           ) 
+        } catch (error) {
+            console.log("Appwrite Service::getPostsWithCategory::error ", error);
             return false
         }
     }

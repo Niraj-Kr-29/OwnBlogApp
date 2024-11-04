@@ -32,15 +32,16 @@ function Home() {
       <Vortex
         backgroundColor="black"
         rangeY={800}
-        rangeSpeed = {0.7}
-        particleCount={80}
-        baseHue={120}
+        rangeSpeed = {0.8}
+        particleCount={100}
+        baseHue={5}
+        rangeHue={30}
         className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full overflow-scroll scroll-smooth no-scrollbar"
       >
         <div className='w-full'>
 
-            <div className='m-6 sm:text-xl md:text-4xl text-lg mb-16 text-center mt-[30rem] sm:mt-0'>DIVE DEEP INTO THE OCEAN OF KNOWLEDGE ON VARIOUS DOMAINS</div>
-            <div className='flex justify-center'>
+            <div className='m-6 sm:text-xl md:text-4xl text-lg mb-16 text-center mt-[25rem] sm:mt-0'>DIVE DEEP INTO THE OCEAN OF KNOWLEDGE ON <span className='text-customOrange'>VARIOUS DOMAINS</span></div>
+            <div className='flex justify-center mt-20'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-10 md:gap-16">
                     {
                         categories.map((category)=>{

@@ -57,14 +57,14 @@ function Navbar({ className }) {
           </Link>
         ) : null)}
 
-        <MenuItem setActive={setActive} active={active} item="All Categories">
+        {authStatus && <MenuItem setActive={setActive} active={active} item="All Categories">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/All Courses">Technology</HoveredLink>
             <HoveredLink href="/Basic Music Theory">Automobile</HoveredLink>
             <HoveredLink href="/Advanced Composition">World Geography</HoveredLink>
             <HoveredLink href="/Songwriting">Psychology</HoveredLink>
           </div>
-        </MenuItem>
+        </MenuItem>}
       </Menu>
     </div>
   );

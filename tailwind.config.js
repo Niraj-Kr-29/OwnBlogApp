@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors:{
+        'customOrange' : '#fc4a09'
+      },
       animation: {
         move: "move 5s linear infinite",
       },
