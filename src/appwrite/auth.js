@@ -31,6 +31,13 @@ export class AuthService{
 
     async login({email,password}){
        try {
+        const currentUser = await this.getCurrentUser();
+        
+        // If a user is already logged in, return the current session
+        if (currentUser) {
+            console.log("User is already logged in.");
+            return currentUser;
+        }
         return await this.account.createEmailPasswordSession(email,password)
        } catch (error) {
         console.log("Appwrite Service :: login::error ", error)
@@ -39,7 +46,7 @@ export class AuthService{
 
     async logout(){
         try {
-            await this.account.deleteSession()
+            await this.account.deleteSession("current")
         } catch (error) {
             console.log("Appwrite Service :: logout::error ", error)
         }

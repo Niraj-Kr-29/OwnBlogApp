@@ -49,10 +49,21 @@ export const deletePostStore = createAsyncThunk('/deletePostStore', async(slug)=
     throw new Error(`Failed to delete post with ID ${slug}`)
 })
 
+export const getPostsByCategory = createAsyncThunk('/getPostByCategory', async(category,{getState})=>{
+    const { posts } = getState().posts
+
+    if(posts.length > 0){
+        const matchedPosts = posts.filter(post => post.category === category)
+        return matchedPosts
+    }
+    return []
+})
+
 const postSlice = createSlice({
     name: 'posts',
     initialState: {
         posts: [],
+        matchedPosts: [],
         currentPost: null,
         loading: false,
         error: null
@@ -109,6 +120,19 @@ const postSlice = createSlice({
                  state.currentPost = action.payload
              })
              .addCase(updatePostStore.rejected,(state)=>{
+                 state.loading = false
+                 state.error = action.error.message
+             })
+             //For getPostsByCategory
+             .addCase(getPostsByCategory.pending, (state)=>{
+                 state.loading = true;
+                 state.error = null
+             })
+             .addCase(getPostsByCategory.fulfilled,(state,action)=>{
+                 state.loading = false
+                 state.matchedPosts = action.payload
+             })
+             .addCase(getPostsByCategory.rejected,(state)=>{
                  state.loading = false
                  state.error = action.error.message
              })

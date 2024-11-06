@@ -32,7 +32,7 @@ function Home() {
       <Vortex
         backgroundColor="black"
         rangeY={800}
-        rangeSpeed = {0.8}
+        rangeSpeed = {10}
         particleCount={100}
         baseHue={5}
         rangeHue={30}
