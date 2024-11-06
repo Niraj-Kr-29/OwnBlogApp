@@ -15,7 +15,7 @@ function App() {
     authService.getCurrentUser()
     .then((userData) => {
       if (userData) {
-        dispatch(storeLogin({userData}))
+        dispatch(storeLogin(userData))
       } else {
         dispatch(storeLogout())
       }

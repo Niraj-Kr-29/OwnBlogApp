@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Input, Select, RTE } from './index'
+import { Input, Select, RTE, Button} from './index'
 import appwriteService from '../appwrite/conf';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ function PostForm({post}) {
             slug: slugTransform(post?.slug || ''),
             content: post?.content || '',
             status: post?.status || 'active',
-            category: post?.category || ''
+            category: post?.category || 'Technology'
         }
     })
 
@@ -32,6 +32,10 @@ function PostForm({post}) {
 
     const submit = async (data) => {
         try {
+            if (!userData?.$id) {
+                console.error("Error: User ID is not available");
+                return; // Stop execution if userData.$id is undefined
+            }
             if(post){
                 const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
@@ -76,7 +80,7 @@ function PostForm({post}) {
     },[watch,slugTransform,setValue])
 
   return (
-    <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
+    <form onSubmit={handleSubmit(submit)} className='flex flex-wrap mt-28'>
        <div className='w-2/3 px-2'>
           <Input
               label = "Title :"

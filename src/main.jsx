@@ -9,6 +9,7 @@ import Home from './pages/Home.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import Logout from './components/Logout.jsx'
+import AddPostPage from './pages/AddPostPage.jsx'
 
 
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/logout',
         element: <Logout />
+      },
+      {
+        path: '/add-post',
+        element: <AddPostPage />
       },
     ]
   }
