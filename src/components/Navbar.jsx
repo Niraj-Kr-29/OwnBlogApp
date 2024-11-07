@@ -59,10 +59,10 @@ function Navbar({ className }) {
 
         {authStatus && <MenuItem setActive={setActive} active={active} item="All Categories">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/All Courses">Technology</HoveredLink>
-            <HoveredLink href="/Basic Music Theory">Automobile</HoveredLink>
-            <HoveredLink href="/Advanced Composition">World Geography</HoveredLink>
-            <HoveredLink href="/Songwriting">Psychology</HoveredLink>
+            <HoveredLink to={'/posts/technology'}>Technology</HoveredLink>
+            <HoveredLink to={"/posts/automobile"}>Automobile</HoveredLink>
+            <HoveredLink to={"/posts/world-geography"}>World Geography</HoveredLink>
+            <HoveredLink to={"/posts/psychology"}>Psychology</HoveredLink>
           </div>
         </MenuItem>}
       </Menu>

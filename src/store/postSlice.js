@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import appwriteService from "../appwrite/conf";
+import { useDispatch } from "react-redux";
 
 //Async Thunks to handle API Calls
 
@@ -10,8 +11,8 @@ export const fetchPosts = createAsyncThunk('/fetchPosts',async(_,{getState})=>{
     //If posts are already loaded then don't make another API call
     if(posts.length > 0) return posts
 
-    const response = await appwriteService.getPosts()
-    return response.documents
+    const response = await appwriteService.getAllPosts()
+    return response
 })
 
 //Thunk to fetch single post by ID
@@ -43,10 +44,10 @@ export const updatePostStore = createAsyncThunk('/updatePostStore',async({slug,t
 })
 
 //Delete a post
-export const deletePostStore = createAsyncThunk('/deletePostStore', async(slug)=>{
-    const success = await appwriteService.deletePost(slug)
-    if(success) return slug
-    throw new Error(`Failed to delete post with ID ${slug}`)
+export const deletePostStore = createAsyncThunk('/deletePostStore', async(postId,{getState})=>{
+    const {posts} = getState().posts
+    const updatedPosts = posts.filter(post => post.$id !== postId)
+    return updatedPosts
 })
 
 export const getPostsByCategory = createAsyncThunk('/getPostByCategory', async(category,{getState})=>{
@@ -56,7 +57,10 @@ export const getPostsByCategory = createAsyncThunk('/getPostByCategory', async(c
         const matchedPosts = posts.filter(post => post.category === category)
         return matchedPosts
     }
-    return []
+    else{
+        const Posts = await appwriteService.getPostsWithCategory(category)
+        return Posts
+    }
 })
 
 const postSlice = createSlice({
@@ -80,7 +84,7 @@ const postSlice = createSlice({
               state.loading = false
               state.posts = action.payload
            })
-           .addCase(fetchPosts.rejected,(state)=>{
+           .addCase(fetchPosts.rejected,(state,action)=>{
               state.loading = false
               state.error = action.error.message
            })
@@ -132,11 +136,23 @@ const postSlice = createSlice({
                  state.loading = false
                  state.matchedPosts = action.payload
              })
-             .addCase(getPostsByCategory.rejected,(state)=>{
+             .addCase(getPostsByCategory.rejected,(state,action)=>{
                  state.loading = false
                  state.error = action.error.message
              })
-            
+             //For deletePostStore
+             .addCase(deletePostStore.pending, (state)=>{
+                 state.loading = true;
+                 state.error = null
+             })
+             .addCase(deletePostStore.fulfilled,(state,action)=>{
+                 state.loading = false
+                 state.posts = action.payload
+             })
+             .addCase(deletePostStore.rejected,(state)=>{
+                 state.loading = false
+                 state.error = action.error.message
+             })
     }
 })
 

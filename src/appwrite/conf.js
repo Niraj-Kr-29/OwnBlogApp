@@ -99,9 +99,10 @@ export class Service{
             config.appwriteDatabaseId,
             config.appwriteCollectionId,
             [Query.equal("status","active"),
-                Query.equal("category",{category})
+                Query.equal("category",category)
             ]
            ) 
+           return response.documents
         } catch (error) {
             console.log("Appwrite Service::getPostsWithCategory::error ", error);
             return false

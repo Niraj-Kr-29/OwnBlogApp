@@ -1,47 +1,42 @@
 import React from 'react'
-import { Vortex } from '../components/ui/vortex'
 import CategoryCard from '../components/CategoryCard';
+import { BackgroundBeamsWithCollision } from '../components/ui/background-beams-with-collision';
+import { useSelector } from 'react-redux';
 
 function Home() {
+    const authStatus = useSelector((state)=>
+        state.auth.status
+      )
     const categories = [
         {
             title: "Technology",
             description: "Innovations and advancements shaping the digital world.",
-            slug: "/technology"
+            slug: "/posts/technology"
         },
         {
             title: "Automobile",
             description: "Vehicles, engines, and the future of transportation.",
-            slug: "/automobile"
+            slug: "/posts/automobile"
         },
         {
             title: "World Geography",
             description: "Explore continents, countries, and natural landscapes.",
-            slug: "/world-geography"
+            slug: "/posts/world-geography"
         },
         {
             title: "Psychology",
             description: "Understanding human behavior and mental processes.",
-            slug: "/psychology"
+            slug: "/posts/psychology"
         }
     ];
     
     
   return (
-    <div className="w-full mx-auto rounded-md  h-screen overflow-hidden">
-      <Vortex
-        backgroundColor="black"
-        rangeY={800}
-        rangeSpeed = {10}
-        particleCount={100}
-        baseHue={5}
-        rangeHue={30}
-        className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full overflow-scroll scroll-smooth no-scrollbar"
-      >
-        <div className='w-full'>
+    <BackgroundBeamsWithCollision>
+        <div className='flex items-center flex-col justify-center px-2 md:px-10 pt-40  py-4 w-full h-screen overflow-scroll scroll-smooth no-scrollbar'>
 
-            <div className='m-6 sm:text-xl md:text-4xl text-lg mb-16 text-center mt-[25rem] sm:mt-0'>DIVE DEEP INTO THE OCEAN OF KNOWLEDGE ON <span className='text-customOrange'>VARIOUS DOMAINS</span></div>
-            <div className='flex justify-center mt-20'>
+            <div className='m-6 sm:text-xl md:text-4xl text-lg mb-16 text-center mt-[25rem] sm:mt-0'>DIVE DEEP INTO THE OCEAN OF KNOWLEDGE ON <span className='bg-gradient-to-r from-customOrange to-yellow-500 bg-clip-text text-transparent'>VARIOUS DOMAINS</span></div>
+            <div className='flex justify-center'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-10 md:gap-16">
                     {
                         categories.map((category)=>{
@@ -49,16 +44,14 @@ function Home() {
                             key={category.slug}
                             title={category.title}
                             description={category.description}
-                            href={category.slug}
+                            href={authStatus ? category.slug : "/login"}
                             />
                         })
                     }
                 </div>
             </div>
         </div>
-
-      </Vortex>
-    </div>
+    </BackgroundBeamsWithCollision>
   );
   
 }

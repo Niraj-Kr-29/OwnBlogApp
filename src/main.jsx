@@ -10,6 +10,10 @@ import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import Logout from './components/Logout.jsx'
 import AddPostPage from './pages/AddPostPage.jsx'
+import EditPostPage from './pages/EditPostPage.jsx'
+import AllPostsPage from './pages/AllPostsPage.jsx'
+import PostPage from './pages/PostPage.jsx'
+import CategoryPostsPage from './pages/CategoryPostsPage.jsx'
 
 
 
@@ -38,6 +42,35 @@ const router = createBrowserRouter([
         path: '/add-post',
         element: <AddPostPage />
       },
+      {
+        path: '/edit-post/:slug',
+        element: <EditPostPage />
+      },
+      {
+        path: '/all-posts',
+        element: <AllPostsPage />
+      },
+      {
+        path: '/post/:slug',
+        element: <PostPage />
+      },
+      {
+        path: '/posts/technology',
+        element: <CategoryPostsPage category="Technology" />
+      },
+      {
+        path: '/posts/psychology',
+        element: <CategoryPostsPage category="Psychology" />
+      },
+      {
+        path: '/posts/automobile',
+        element: <CategoryPostsPage category="Automobile" />
+      },
+      {
+        path: '/posts/world-geography',
+        element: <CategoryPostsPage category="World Geography" />
+      },
+      
     ]
   }
 ])

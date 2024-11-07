@@ -25,11 +25,11 @@ function App() {
 
   return (
     <>
-     <div className='min-h-screen flex flex-wrap content-between'>
-      <div className='w-full block'>
+     <div className='min-h-screen flex flex-wrap content-between '>
+      <div className='w-full block '>
         <Navbar />
         <main>
-         <Outlet />
+         <Outlet/>
         </main>
         <Footer />
       </div>

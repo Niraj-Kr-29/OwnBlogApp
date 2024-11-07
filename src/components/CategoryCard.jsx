@@ -5,7 +5,7 @@ function CategoryCard({title,description,href}) {
     return (
         <>
           <Link to={href || '/'}>
-            <div className='w-64 h-52 bg-gradient-to-br from-neutral-900 to-neutral-800 text-white rounded-md p-5 hover:bg-gradient-to-br hover:from-neutral-700 hover:to-neutral-800 transition-all ease-in-out duration-500 hover:scale-110'>
+            <div className='w-64 h-52 bg-gradient-to-br from-black to-neutral-800 text-white rounded-md p-5 drop-shadow-xl hover:bg-gradient-to-br hover:from-neutral-700 hover:to-neutral-800 transition-all ease-in-out duration-500 hover:scale-110'>
                 <div className='text-left'>
                     <p className='text-2xl text-left'>{title || "Title"}</p>
                     <p className='text-sm text-left mt-6'>{description || "Description"}</p>
