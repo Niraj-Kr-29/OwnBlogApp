@@ -52,12 +52,12 @@ function Navbar({ className }) {
     <div className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 ",className )}>
       <Menu setActive={setActive} className = 'text-purple-600'>
         {navItems.map((item)=> item.active? (
-          <Link key={`${item.slug}`} to={`${item.slug}`}>
+          <Link key={`${item.slug}`} to={`${item.slug}`} className="md:text-lg text-sm">
             <MenuItem setActive={setActive} active={active} item={`${item.name}`} />
           </Link>
         ) : null)}
 
-        {authStatus && <MenuItem setActive={setActive} active={active} item="All Categories">
+        {authStatus && <MenuItem setActive={setActive} active={active} item="All Categories" className='text-sm md:text-lg'>
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink to={'/posts/technology'}>Technology</HoveredLink>
             <HoveredLink to={"/posts/automobile"}>Automobile</HoveredLink>

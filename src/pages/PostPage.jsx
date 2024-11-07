@@ -37,7 +37,7 @@ export default function PostPage() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-8 md:pt-0 pt-40">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
