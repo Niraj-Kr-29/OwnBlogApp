@@ -14,8 +14,8 @@ function CategoryPostsPage({category}) {
         dispatch(getPostsByCategory(category))
     },[dispatch,category])
 
-    if (loading) return <div className='h-screen w-full text-3xl text-center mt-40'>`Loading {category} posts...</div>;
-    if (error) return <div className='h-screen w-full text-3xl text-center mt-40'>Error: {error}</div>;
+    if (loading) return <div className='h-screen w-full text-2xl text-center mt-40'>Loading {category} posts!</div>;
+    if (error) return <div className='h-screen w-full text-2xl text-center mt-40'>Error: {error}</div>;
 
   return (
     <div className='w-full py-8 h-screen pt-32 bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] -z-10 overflow-scroll scroll-smooth no-scrollbar'>
